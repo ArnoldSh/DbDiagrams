@@ -1,0 +1,54 @@
+#legend {
+    position: fixed;
+    top: 5px;
+    right: 20px;
+}
+#paper-holder {
+    position: fixed;
+    top: 5px;
+    left: 5px;
+    border: 1px solid silver;
+}
+.connection-wrap {
+    fill: none;
+    stroke: #80B5FF;
+    stroke-width: 14;
+    stroke-linecap: butt;
+    stroke-linejoin: round;
+    opacity: 0;
+    cursor: pointer;
+}
+.connection-wrap:hover {
+    opacity: .4;
+    stroke-opacity: .4;
+}
+.marker-vertex {
+    fill: #3D79CC;
+    r: 8;
+    opacity: 0.5;
+    stroke: none;
+}
+.marker-vertex-remove {
+    cursor: pointer;
+    opacity: 0;
+    fill: white;
+}
+.marker-vertex:hover {
+    fill: #3D79CC;
+    r: 12;
+    opacity: .25;
+    stroke: none;
+}
+.marker-vertex-remove-area {
+    opacity: 0;
+    cursor: pointer;
+}
+.marker-vertex-group:hover .marker-vertex-remove-area {
+    opacity: 1;
+}
+.element {
+    cursor: default;
+}
+.paper-scroller {
+    border: 1px solid silver;
+}

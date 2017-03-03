@@ -1,37 +1,88 @@
 'use strict';
 var     gulp    =   require('gulp'),
         concat  =   require('gulp-concat'),
+        rename  =   require('gulp-rename'),
         uglify  =   require('gulp-uglify'),
-        jsdoc   =   require('gulp-jsdoc3'),
         pump    =   require('pump'),
-        exec    =   require('child_process').exec;
+        minCss  =   require('gulp-clean-css');
 
-//var libs = ['jquery', 'underscore', 'backbone'];
+// for npm
+/*"scripts": {
+    "postinstall": "echo Copy lodash dist... && cd node_modules/lodash && md dist && copy index.js dist && cd dist && rename index.js lodash.js"
+}*/
 
-gulp.task('concat-and-compress-js', function (callback) {
-    pump(
-        [
-            gulp.src(['node_modules/jquery/dist/jquery.js', 'node_modules/underscore/underscore.js', 'node_modules/backbone/backbone.js', 'node_modules/lodash/dist/lodash.js', 'node_modules/jointjs/dist/*.js', 'src/client/js/test.js']),
-            concat('db-diagrams.min.js'),
-            //uglify(),
-            gulp.dest('dist/client/js')
-        ],
-        callback
-    );
-});
+// path variables
 
-gulp.task('concat-css', function(callback) {
+var srcLib = {
+    'jquery': 'node_modules/jquery/dist/jquery.js',
+    'lodash': 'node_modules/lodash/index.js',
+    'underscore': 'node_modules/underscore/underscore.js',
+    'backbone': 'node_modules/backbone/backbone.js'
+};
+var jointLibJs = 'node_modules/jointjs/dist/joint.js';
+var jointLibCss = 'node_modules/jointjs/dist/joint.css';
+
+var srcJs = 'src/client/js/*.js';
+var distJs = 'dist/client/js';
+
+var srcCss = 'src/client/css/*.css';
+var distCss = 'dist/client/css';
+
+var distJsName = 'db-diagrams.min.js';
+var distCssName = 'db-diagrams.min.css';
+
+gulp.task('rename-lodash', function(callback) {
    pump(
        [
-           gulp.src(['node_modules/jointjs/dist/joint.min.css', 'src/client/css/*.css']),
-           concat('db-diagrams.min.css'),
-           gulp.dest('dist/client/css')
+           gulp.src('node_modules/lodash/index.js'),
+           rename('lodash.js'),
+           gulp.dest('node_modules/lodash/')
        ],
        callback
    );
 });
 
-gulp.task('prepare-test', ['prepare-dist'], function(callback) {
+gulp.task('copy-and-compress-js', ['rename-lodash'], function(callback) {
+
+    var mergedJs = [];
+
+    mergedJs.push(srcLib['jquery']);
+    mergedJs.push(srcLib['lodash']);
+    //mergedJs.push(srcLib['underscore']);
+    mergedJs.push(srcLib['backbone']);
+    mergedJs.push(jointLibJs);
+    mergedJs.push(srcJs);
+
+    pump(
+        [
+            gulp.src(mergedJs),
+            concat(distJsName),
+            //uglify(),
+            gulp.dest(distJs),
+        ],
+        callback
+    );
+});
+
+gulp.task('copy-css', ['rename-lodash'], function(callback) {
+
+    var mergedCss = [];
+
+    mergedCss.push(jointLibCss);
+    mergedCss.push(srcCss);
+
+    pump(
+        [
+            gulp.src(mergedCss),
+            concat(distCssName),
+            //minCss(),
+            gulp.dest(distCss)
+        ],
+        callback
+    );
+});
+
+gulp.task('prepare-test', ['copy-and-compress-js', 'copy-css'], function(callback) {
    pump(
        [
            gulp.src('dist/client/js/db-diagrams.min.js'),
@@ -42,7 +93,5 @@ gulp.task('prepare-test', ['prepare-dist'], function(callback) {
        callback
    )
 });
-
-gulp.task('prepare-dist', ['concat-css', 'concat-and-compress-js']);
 
 gulp.task('default', ['prepare-test']);

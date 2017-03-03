@@ -9,6 +9,93 @@
 
 <script type="text/javascript" src="../js/db-diagrams.min.js"></script>
 
+<div id="paper-holder"></div>
+<div id="legend"></div>
+
+<script>
+    var jsonData = {
+        "tables": [{
+            "name": "TestTable1",
+            "id": "tableId",
+            "position": {
+                "x": 100,
+                "y": 200
+            },
+            "link": "http:\/\/google.com\/",
+            "columns": [
+                "id: NUMBER(9,0)",
+                "date: TIMESTAMP(6)",
+                "name: VARCHAR(200)"
+            ],
+            "indicies": [
+                "index1",
+                "index2"
+            ],
+            "triggers": [
+                "trigger1",
+                "tri2"
+            ]
+        }],
+        "views": [{
+            "name": "TestView1",
+            "id": "viewId",
+            "position": {
+                "x": 400,
+                "y": 100
+            },
+            "link": "http:\/\/google.com\/",
+            "columns": [
+                "id: NUMBER(9,0)",
+                "date: TIMESTAMP(6)",
+                "name: VARCHAR(200)"
+            ],
+            "indicies": [
+                "index1",
+                "index2"
+            ],
+            "triggers": [
+                "trigger1",
+                "tri2"
+            ]
+        }],
+        "shortcuts": [{
+            "name": "TableShortcut1",
+            "id": "shortcutId",
+            "position": {
+                "x": 400,
+                "y": 300
+            },
+            "link": "http:\/\/google.com\/",
+            "fields": ["guid: VARCHAR(60)"]
+        }],
+        "sequences": [{
+            "name": "BasicGen",
+            "id": "sequenceId",
+            "position": {
+                "x": 100,
+                "y": 100
+            },
+            "link": "http:\/\/google.com\/"
+        }],
+        "labels": [{
+            "text": "TestLabel",
+            "position": {
+                "x": 100,
+                "y": 50
+            }
+        }],
+        "references": [{
+            "type": "ForeignKeyReference",
+            "link": "http:\/\/google.com\/",
+            "source": "tableId",
+            "target": "shortcutId",
+            "childColumn": "id",
+            "parentColumn": "guid"
+        }]
+    };
+
+    buildDiagram(jsonData, 'paper-holder', false);
+</script>
 
 </body>
 </html>

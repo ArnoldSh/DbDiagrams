@@ -1,15 +1,18 @@
 {
-	"name": "DbDiagrams",
-	"version": "2.0.0",
-	"description": "Simple JS library for visualization database structure",
-	"main": "gulpfile.js",
-	"license": "GPL",
-	"devDependencies": {
-		"jointjs": "^1.0.0",
-		"gulp": "^3.9.0",
-		"gulp-concat": "^2.6.0",
-    	"gulp-uglify": "^1.5.1",
-    	"gulp-jsdoc3": "^1.0.0",
-    	"pump": "^1.0.0"
-	}
+  "name": "DbDiagrams",
+  "version": "2.0.0",
+  "description": "Simple JS library for visualization database structure",
+  "main": "gulpfile.js",
+  "license": "GPL",
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^1.5.1",
+    "gulp-clean-css": "^3.0.3",
+    "pump": "^1.0.0"
+  },
+  "dependencies": {
+    "jointjs": "1.0.3"
+  }
 }

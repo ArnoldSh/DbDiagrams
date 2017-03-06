@@ -48,7 +48,6 @@ gulp.task('copy-and-compress-js', ['rename-lodash'], function(callback) {
 
     mergedJs.push(srcLib['jquery']);
     mergedJs.push(srcLib['lodash']);
-    //mergedJs.push(srcLib['underscore']);
     mergedJs.push(srcLib['backbone']);
     mergedJs.push(jointLibJs);
     mergedJs.push(srcJs);
@@ -57,7 +56,7 @@ gulp.task('copy-and-compress-js', ['rename-lodash'], function(callback) {
         [
             gulp.src(mergedJs),
             concat(distJsName),
-            //uglify(),
+            uglify(),
             gulp.dest(distJs),
         ],
         callback
@@ -75,7 +74,7 @@ gulp.task('copy-css', ['rename-lodash'], function(callback) {
         [
             gulp.src(mergedCss),
             concat(distCssName),
-            //minCss(),
+            minCss(),
             gulp.dest(distCss)
         ],
         callback

@@ -7,6 +7,7 @@ var     gulp    =   require('gulp'),
         minCss  =   require('gulp-clean-css');
 
 // for npm
+
 /*"scripts": {
     "postinstall": "echo Copy lodash dist... && cd node_modules/lodash && md dist && copy index.js dist && cd dist && rename index.js lodash.js"
 }*/
@@ -16,7 +17,6 @@ var     gulp    =   require('gulp'),
 var srcLib = {
     'jquery': 'node_modules/jquery/dist/jquery.js',
     'lodash': 'node_modules/lodash/index.js',
-    'underscore': 'node_modules/underscore/underscore.js',
     'backbone': 'node_modules/backbone/backbone.js'
 };
 var jointLibJs = 'node_modules/jointjs/dist/joint.js';
@@ -57,7 +57,7 @@ gulp.task('copy-and-compress-js', ['rename-lodash'], function(callback) {
             gulp.src(mergedJs),
             concat(distJsName),
             uglify(),
-            gulp.dest(distJs),
+            gulp.dest(distJs)
         ],
         callback
     );

@@ -11,9 +11,7 @@
   
   If everything is OK you should get something like that:
   
-  <p align="center">
-  ![a](./example_diagram.png "a")
-  </p>
+  ![alt text](https://github.com/ArnoldSh/DbDiagrams/blob/master/example_diagram.png)
 
 # Comming soon
   At now DbDiagrams has not any API docs and specification of application protocol (raw JSON object) that describes metadata of database. Someday I shall do :)
